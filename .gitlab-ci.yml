@@ -17,6 +17,8 @@ docker-build:
   services:
     - docker:dind
   before_script:
+    - apk update
+    - apk add git
     - |
       if [ "$SCHEDULED" = true ] ; then
         # If this is triggered as a scheduled job, check if the version has changed
@@ -24,10 +26,8 @@ docker-build:
         if [ "$(cat bliss-version)" != "$VER" ] ; then
           # If version has changed, update bliss-version and push
           echo "$VER" > bliss-version
-          apk update
-          apk add git
           git config --global user.email "$CI_EMAIL"
-          git config --global user.name "$CI_USERNAME"
+          git config --global user.name 'CI/CD auto-bump'
           git add bliss-version
           git commit -m "Bump bliss version"
           git remote rm origin && git remote add origin https://"$CI_USERNAME":"$CI_PASSWORD"@gitlab.com/$CI_PROJECT_PATH.git
@@ -43,6 +43,8 @@ docker-build:
   # Default branch leaves tag empty (= latest tag)
   # All other branches are tagged with the escaped branch name (commit ref slug)
   script:
+    - git remote rm origin && git remote add origin https://"$CI_MIRROR_USERNAME":"$CI_MIRROR_PASSWORD"@github.com/$CI_PROJECT_PATH.git
+    - git push origin HEAD:$CI_COMMIT_REF_NAME # Pushes to the same branch as the trigger
     - |
       if [[ "$CI_COMMIT_BRANCH" == "$CI_DEFAULT_BRANCH" ]]; then
         tag=""
