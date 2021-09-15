@@ -1,26 +1,29 @@
-FROM lsiobase/alpine:3.13
+FROM alpine:3.14
 
-ENV VMARGS -Dbliss_working_directory=/config
-
-VOLUME /config /music
+ENV VMARGS=-Dbliss_working_directory=/config
 
 EXPOSE 3220 3221
 
+VOLUME ["/config"]
+
 RUN mkdir /bliss
 
-ADD rootfs/bliss-runner.sh /bliss/
+ADD scripts/entrypoint.sh /bliss/
+ADD scripts/bliss-runner.sh /bliss/
 
 RUN chmod +x /bliss/bliss-runner.sh
 
-RUN apk update
-RUN apk add wget openjdk8-jre-base
-
-RUN wget -qO- http://www.blisshq.com/app/latest-linux-version | xargs wget -O bliss-install-latest.jar -nv
-
-RUN echo INSTALL_PATH=/bliss > auto-install.properties
-RUN java -jar bliss-install-latest.jar -console -options auto-install.properties
+# All one command to allow cleanup within the same container
+RUN apk update ; \
+    apk add --no-cache wget shadow openjdk8-jre-base su-exec ; \
+    wget -qO- http://www.blisshq.com/app/latest-linux-version | xargs wget -O bliss-install-latest.jar -nv ; \
+    echo INSTALL_PATH=/bliss > auto-install.properties ; \
+    java -jar bliss-install-latest.jar -console -options auto-install.properties ; \
+    apk del wget ; \
+    rm bliss-install-latest.jar ; \
+    rm /var/cache/apk/*
 
 WORKDIR /bliss
 
-CMD /bliss/bliss-runner.sh
-
+ENTRYPOINT ["/bliss/entrypoint.sh"]
+CMD ["/bliss/bliss-runner.sh"]
