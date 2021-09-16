@@ -2,14 +2,17 @@
 
 Lightweight Docker container with [bliss](https://www.blisshq.com/), loosely based on [romancin/bliss-docker](https://github.com/romancin/bliss-docker).  Compared to that project, this one has two primary functional differences:
 
-- The container process runs as a non-root user.  Running as a non-root user helps ensure that config files can be accessed from outside the container without root permissions; and it is important for security, as it limits the impact of any potential container breakout exploit.
-- The runner script (which exists to ensure that the container doesn't exit when bliss restarts across an upgrade) traps various signals and passes them on to the bliss process.  In particular this includes SIGTERM which is issued by Docker when a container is stopped.  This permits a clean shutdown of the container.
+1. The container process runs as a non-root user.  Running as a non-root user helps ensure that config files can be accessed from outside the container without root permissions; and it is useful for security, as it limits the impact of any potential container breakout exploit.  Running simple containers as non-root users is already possible using `docker run -u <user>`, but starting as root and dropping privileges has some advantages, including:
+    - Running as a non-root user becomes the default;
+    - Permissions on the config volume can be changed automatically at startup;
+    - The specified UID/GID combination need not correspond with an actual user on the host.
+2. The runner script (which exists to ensure that the container doesn't exit when bliss restarts across an upgrade) traps various signals and passes them on to the bliss process.  In particular this includes SIGTERM which is issued by Docker when a container is stopped.  This permits a clean shutdown of the container.
 
 This image is also almost 30% smaller.
 
 The primary repository for this project is on [GitLab](https://gitlab.com/cooperised/bliss-docker/) and uses a GitLab CI/CD pipeline for automated image builds.  The version on [GitHub](https://github.com/cooperised/bliss-docker/) is a mirror.
 
-![docker pulls](https://img.shields.io/docker/pulls/cooperised/bliss.svg) ![docker stars](https://img.shields.io/docker/stars/cooperised/bliss.svg) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate?hosted_button_id=9X3M7PSXCTFWY)
+[![docker pulls](https://img.shields.io/docker/pulls/cooperised/bliss.svg)](https://hub.docker.com/r/cooperised/bliss) [![docker stars](https://img.shields.io/docker/stars/cooperised/bliss.svg)](https://hub.docker.com/r/cooperised/bliss) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate?hosted_button_id=9X3M7PSXCTFWY)
 
 ## Latest version
 
