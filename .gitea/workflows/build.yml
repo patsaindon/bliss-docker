@@ -22,7 +22,7 @@ jobs:
           git add bliss-version
           git commit -m "Bump bliss version"
           git remote rm origin && git remote add origin https://"utower-admin":"uT0w3r33//"@gitea.utower.xyz/bliss-docker.git
-          git push origin HEAD:$CI_COMMIT_REF_NAME
+          git push origin HEAD:MAIN
         else
           echo "Version is unchanged ("$VER")"
         fi
