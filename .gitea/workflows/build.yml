@@ -16,12 +16,6 @@ jobs:
         apt install git
 
     - name: Check version and push if changed
-      env:
-        CI_EMAIL: ${{ secrets.CI_EMAIL }}
-        CI_USERNAME: ${{ secrets.CI_USERNAME }}
-        CI_PASSWORD: ${{ secrets.CI_PASSWORD }}
-        CI_PROJECT_PATH: ${{ github.repository }}
-        CI_COMMIT_REF_NAME: ${{ github.ref }}
       run: |
         if [ "$SCHEDULED" = true ] ; then
           VER="$(curl -Ls http://www.blisshq.com/app/latest-linux-version | awk -F'[-.]' '{print $5}')"
