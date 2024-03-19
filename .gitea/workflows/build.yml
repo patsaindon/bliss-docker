@@ -17,6 +17,7 @@ jobs:
 
     - name: Update and install git
       run: |
+        find / -name docker 
         VER="$(cat bliss-version)"
 
     - name: Login to Docker Hub
