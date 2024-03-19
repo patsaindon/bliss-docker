@@ -12,8 +12,8 @@ jobs:
 
     - name: Update and install git
       run: |
-        apk update
-        apk add git
+        apt-get update
+        apt install git
 
     - name: Check version and push if changed
       env:
