@@ -14,9 +14,6 @@ jobs:
       run: |
         apt-get update
         apt install git
-
-    - name: Check version and push if changed
-      run: |
         VER="$(curl -Ls http://www.blisshq.com/app/latest-linux-version | awk -F'[-.]' '{print $5}')"
         if [ "$(cat bliss-version)" != "$VER" ] ; then
           echo "$VER" > bliss-version
@@ -29,4 +26,3 @@ jobs:
         else
           echo "Version is unchanged ("$VER")"
         fi
-
