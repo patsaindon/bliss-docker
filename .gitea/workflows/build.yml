@@ -24,7 +24,7 @@ jobs:
         CI_COMMIT_REF_NAME: ${{ github.ref }}
       run: |
         if [ "$SCHEDULED" = true ] ; then
-          VER="$(wget -qO- http://www.blisshq.com/app/latest-linux-version)"
+          VER="$(curl -Ls http://www.blisshq.com/app/latest-linux-version | awk -F'[-.]' '{print $5}')"
           if [ "$(cat bliss-version)" != "$VER" ] ; then
             echo "$VER" > bliss-version
             git config --global user.email "$CI_EMAIL"
