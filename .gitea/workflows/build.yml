@@ -1,0 +1,45 @@
+name: Docker Build
+
+on: [push, pull_request]
+
+jobs:
+  docker-build:
+    runs-on: ubuntu-latest
+    container:
+      image: docker:latest
+    services:
+      docker:
+        image: docker:dind
+        options: --privileged
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Update and install git
+      run: |
+        apk update
+        apk add git
+
+    - name: Check version and push if changed
+      env:
+        CI_EMAIL: ${{ secrets.CI_EMAIL }}
+        CI_USERNAME: ${{ secrets.CI_USERNAME }}
+        CI_PASSWORD: ${{ secrets.CI_PASSWORD }}
+        CI_PROJECT_PATH: ${{ github.repository }}
+        CI_COMMIT_REF_NAME: ${{ github.ref }}
+      run: |
+        if [ "$SCHEDULED" = true ] ; then
+          VER="$(wget -qO- http://www.blisshq.com/app/latest-linux-version)"
+          if [ "$(cat bliss-version)" != "$VER" ] ; then
+            echo "$VER" > bliss-version
+            git config --global user.email "$CI_EMAIL"
+            git config --global user.name 'CI/CD auto-bump'
+            git add bliss-version
+            git commit -m "Bump bliss version"
+            git remote rm origin && git remote add origin https://"$CI_USERNAME":"$CI_PASSWORD"@github.com/$CI_PROJECT_PATH.git
+            git push origin HEAD:$CI_COMMIT_REF_NAME
+          else
+            echo "Version is unchanged ("$VER")"
+          fi
+        fi
