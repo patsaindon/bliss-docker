@@ -18,11 +18,10 @@ jobs:
         if [ "$(cat bliss-version)" != "$VER" ] ; then
           echo "$VER" > bliss-version
           git config --global user.email "pat.saindon@gmail.com"
-          git config --global user.name 'CI/CD auto-bump'
+          git config --global user.name 'utower-admin'
           git add bliss-version
           git commit -m "Bump bliss version"
-          git remote rm origin && git remote add origin https://"utower-admin":"uT0w3r33//"@gitea.utower.xyz/bliss-docker.git
-          git push origin HEAD:MAIN
+          git remote rm origin && git remote add origin https://gitea.utower.xyz/utower-admin/bliss-docker.git
         else
           echo "Version is unchanged ("$VER")"
         fi
