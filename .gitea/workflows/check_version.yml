@@ -1,6 +1,10 @@
 name: Docker Build
 
-on: [push, pull_request]
+on:
+  schedule:
+    - cron: '0 0,8,16 * * *'
+  push:
+  pull_request:
 
 jobs:
   docker-build:
