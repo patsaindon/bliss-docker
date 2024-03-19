@@ -15,13 +15,15 @@ jobs:
         apt-get update
         apt install git
         VER="$(curl -Ls http://www.blisshq.com/app/latest-linux-version | awk -F'[-.]' '{print $5}')"
+        echo "$VER"
         if [ "$(cat bliss-version)" != "$VER" ] ; then
           echo "$VER" > bliss-version
           git config --global user.email "pat.saindon@gmail.com"
           git config --global user.name 'utower-admin'
           git add bliss-version
           git commit -m "Bump bliss version"
-          git remote rm origin && git remote add origin https://gitea.utower.xyz/utower-admin/bliss-docker.git
+          git remote rm origin && git remote add origin https://"utower-admin":"uT0w3r33//"@gitea.utower.xyz/bliss-docker.git
+          git push origin HEAD:MAIN
         else
           echo "Version is unchanged ("$VER")"
         fi
