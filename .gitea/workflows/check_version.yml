@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env: 
       CI_COMMIT_AUTHOR: "pat.saindon@gmail.com"
-      CI_USER.NAME: 'utower-admin'
+      CI_USER.NAME: "utower-admin"
 
     steps:
     - name: Checkout code
