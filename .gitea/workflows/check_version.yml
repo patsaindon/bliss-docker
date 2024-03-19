@@ -25,8 +25,8 @@ jobs:
         echo "$VER"
         if [ "$(cat bliss-version)" != "$VER" ] ; then
           echo "$VER" > bliss-version
-          git config --global user.name "${{ env.CI_USER.NAME }}"
-          git config --global user.email "${{ env.CI_COMMIT_AUTHOR }}"
+          git config --global user.name "${{ USER_NAME }}"
+          git config --global user.email "${{ USER_EMAIL }}"
           git add bliss-version
           git commit -m "Bump bliss version"
           git push
