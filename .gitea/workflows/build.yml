@@ -6,7 +6,6 @@ jobs:
   docker-build:
     runs-on: ubuntu-latest
     env: 
-      CI_COMMIT_MESSAGE: Continuous Integration Build Artifacts
       CI_COMMIT_AUTHOR: "pat.saindon@gmail.com"
       CI_USER.NAME: 'utower-admin'
 
@@ -22,9 +21,8 @@ jobs:
         echo "$VER"
         if [ "$(cat bliss-version)" != "$VER" ] ; then
           echo "$VER" > bliss-version
-          git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
-          git config --global user.email "pat.saindon@gmail.com"
-          git config --global user.name 'utower-admin'
+          git config --global user.name "${{ env.CI_USER.NAME }}"
+          git config --global user.email "${{ env.CI_COMMIT_AUTHOR }}"
           git add bliss-version
           git commit -m "Bump bliss version"
           git push
