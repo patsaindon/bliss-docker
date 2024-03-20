@@ -1,10 +1,13 @@
 FROM alpine:latest
 
+LABEL MAINTAINER "Patrick Saindon <pat.saindon@gmail.com>"
+LABEL APP "bliss"
+
 ENV VMARGS=-Dbliss_working_directory=/config
 
 EXPOSE 3220 3221
 
-VOLUME ["/config"]
+VOLUME /config /music
 
 RUN mkdir /bliss
 

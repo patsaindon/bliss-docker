@@ -37,9 +37,10 @@ Sample run command, running as the existing host user `user`:
 docker run -d --name=bliss \
 -v /share/Container/bliss:/config \
 -v /share/MyMusic:/music \
+-v /path/to/store/license/:/root/.java \
 -e PGID=`id -u user` -e PUID=`id -g user` \
 -e TZ=Europe/London \
 -p 3220:3220 \
 -p 3221:3221 \
-cooperised/bliss:latest
+patsaindon/docker-bliss:latest
 ```

@@ -18,9 +18,9 @@ jobs:
 
       - name: Set env
         run: echo "RELEASE_VERSION=$(cat bliss-version)" >> $GITHUB_ENV
-      - name: Test
+
+      - name: Test env.RELEASE_VERSION
         run: |
-          echo $RELEASE_VERSION
           echo ${{ env.RELEASE_VERSION }}
 
       - name: Set up QEMU
@@ -43,5 +43,4 @@ jobs:
           platforms: linux/amd64,linux/arm64
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/docker-bliss:${{ env.RELEASE_VERSION }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/docker-bliss:${{ env.DOCKER_LATEST }}
             ${{ secrets.DOCKERHUB_USERNAME }}/docker-bliss:latest
