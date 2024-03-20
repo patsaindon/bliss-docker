@@ -18,6 +18,10 @@ jobs:
       run: |
         apt-get update
         apt install git
+
+
+    - name: Get latest bliss version
+      run: |
         VER="$(curl -Ls http://www.blisshq.com/app/latest-linux-version | awk -F'[-.]' '{print $5}')"
         echo "$VER"
         if [ "$(cat bliss-version)" != "$VER" ] ; then
