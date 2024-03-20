@@ -19,5 +19,8 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
+    - name: Make the script files executable
+      run: chmod +x ./check_version.sh
+
     - name: Get latest bliss version
-      run: bash ./check_version.sh
+      run: ./check_version.sh
