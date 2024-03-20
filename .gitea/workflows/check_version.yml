@@ -21,3 +21,4 @@ jobs:
 
     - name: Get latest bliss version
       run: ./check_version.sh
+      shell: bash
