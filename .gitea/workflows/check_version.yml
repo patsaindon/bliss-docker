@@ -18,11 +18,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Update and install git
-      run: |
-        apt-get update
-        apt install git
-
     - name: Get latest bliss version
       run: |
         VER="$(curl -Ls http://www.blisshq.com/app/latest-linux-version | awk -F'[-.]' '{print $5}')"
