@@ -4,6 +4,7 @@ on:
   schedule:
     - cron: '0 0,8,16 * * *'
   push:
+    branches: [ main ]
   pull_request:
 
 jobs:
@@ -34,3 +35,4 @@ jobs:
         else
           echo "Version is unchanged ("$VER")"
         fi
+      shell: bash
