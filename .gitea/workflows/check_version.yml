@@ -25,5 +25,4 @@ jobs:
 
     - name: Get latest bliss version
       run: |
-        bash chmod +x check_version.sh
         bash check_version.sh
