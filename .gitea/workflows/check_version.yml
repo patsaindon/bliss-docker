@@ -19,8 +19,5 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Show file
-      run: bash cat bliss-version
-
     - name: Get latest bliss version
-      run: bash check_version.sh
+      run: bash ./check_version.sh
