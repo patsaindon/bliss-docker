@@ -21,6 +21,7 @@ jobs:
         echo "Latest available version: $VER"
         if [[ "$(cat bliss-version)" != *${VER}* ]]; then
         echo "Version is changed"
+        echo "::set-output name=commit::true"
         echo $VER > bliss-version
         else
         echo "Version is unchanged ("$VER")"
@@ -28,10 +29,10 @@ jobs:
       shell: bash
 
     - name: Commit version change
+      if: steps.isSmoke.output.commit == true
       run: |
         git config --global user.email "USER_EMAIL"
         git config --global user.name "USER_NAME"
         git add bliss-version
         git commit -m "Update bliss version"
         git push
-      
