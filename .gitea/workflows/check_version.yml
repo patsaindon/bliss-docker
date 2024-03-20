@@ -21,5 +21,7 @@ jobs:
 
     - name: Get latest bliss version
       run: |
+        ls -l
         ./check_version.sh
+
 
