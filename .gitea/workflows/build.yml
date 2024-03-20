@@ -33,3 +33,4 @@ jobs:
           tags: patsaindon/docker-bliss:latest
           secrets: |
             "password=${{ secrets.DOCKERHUB_TOKEN }}" 
+            
