@@ -22,7 +22,9 @@ jobs:
         run: |
           VER="$(cat bliss-version)"
           echo "Bliss version $VER"
-          echo "DOCKER_IMAGE_VERSION=$VER" > .env
+          echo "DOCKER_IMAGE_VERSION=$VER" >> .env
+          echo ${{ DOCKER_IMAGE_VERSION }}
+          echo ${{ DOCKER_IMAGE_NAME }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
