@@ -1,4 +1,4 @@
-FROM alpine:3.14
+FROM alpine:latest
 
 ENV VMARGS=-Dbliss_working_directory=/config
 
