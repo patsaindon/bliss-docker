@@ -31,5 +31,4 @@ jobs:
           platforms: linux/amd64,linux/arm64
           tags: patsaindon/docker-bliss:latest
           secrets: |
-            "password=${{ secrets.DOCKERHUB_TOKEN }}"            
-            "username=${{ secrets.DOCKERHUB_USERNAME }}"
+            "password=${{ secrets.DOCKERHUB_TOKEN }}" 
