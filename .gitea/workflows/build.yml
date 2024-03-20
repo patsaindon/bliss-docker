@@ -16,13 +16,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Get bliss version
+      - name: Set env
+        run: echo "RELEASE_VERSION=$(cat bliss-version)" >> $GITHUB_ENV
+      - name: Test
         run: |
-          VER="$(cat bliss-version)"
-          echo "Bliss version $VER"
-          echo "DOCKER_IMAGE_VERSION=$VER" >> .env
-          echo ${{ DOCKER_IMAGE_VERSION }}
-          echo ${{ DOCKER_IMAGE_NAME }}
+          echo $RELEASE_VERSION
+          echo ${{ env.RELEASE_VERSION }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -43,5 +42,5 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags:  |
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ DOCKER_IMAGE_NAME }}:${{ DOCKER_IMAGE_VERSION }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ DOCKER_IMAGE_NAME }}:${{ env.RELEASE_VERSION }}
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ DOCKER_IMAGE_NAME }}:latest
