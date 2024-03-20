@@ -26,3 +26,12 @@ jobs:
         echo "Version is unchanged ("$VER")"
         fi
       shell: bash
+
+    - name: Commit version change
+      run: |
+        git config --global user.email "USER_EMAIL"
+        git config --global user.name "USER_NAME"
+        git add bliss-version
+        git commit -m "Update bliss version"
+        git push
+      
