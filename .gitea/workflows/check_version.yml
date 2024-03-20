@@ -21,6 +21,7 @@ jobs:
         echo "Latest available version: $VER"
         if [[ "$(cat bliss-version)" != *${VER}* ]]; then
         echo "Version is changed"
+        echo $VER > bliss-version
         git config --global init.defaultBranch main
         git config --global user.name "${{ USER_NAME }}"
         git config --global user.email "${{ USER_EMAIL }}"
