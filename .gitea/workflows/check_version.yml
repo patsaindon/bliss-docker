@@ -5,7 +5,6 @@ on:
     - cron: '0 0,8,16 * * *'
   push:
     branches: [ main ]
-  pull_request:
 
 jobs:
   check_version:
@@ -16,7 +15,8 @@ jobs:
 
     - name: Get latest bliss version
       run: |
-        cat bliss-version
+        echo "Checking for new version of bliss"
+        echo "Current version: $(cat bliss-version)"
         VER="$(curl -Ls http://www.blisshq.com/app/latest-linux-version | awk -F'[-.]' '{print $5}')"
         echo "$VER"
         if [ "$(cat bliss-version)" != "$VER" ] ; then
