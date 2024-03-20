@@ -17,15 +17,16 @@ jobs:
       run: |
         echo "Current version: $(cat bliss-version)"
         echo "$(curl -Ls http://www.blisshq.com/app/latest-linux-version | awk -F'[-.]' '{print $5}')"
-        echo VER="$(curl -Ls http://www.blisshq.com/app/latest-linux-version | awk -F'[-.]' '{print $5}')"
-        echo if [ "$(cat bliss-version)" != "$VER" ] ; then
-        echo     git config --global init.defaultBranch main
-        echo     git config --global user.name "${{ USER_NAME }}"
-        echo     git config --global user.email "${{ USER_EMAIL }}"
-        echo     git add bliss-version
-        echo     git commit -m "Bump bliss version to $VER"
-        echo     git push
-        echo else
-        echo "Version is unchanged ("$VER")"
-        echo fi
+        VER="$(curl -Ls http://www.blisshq.com/app/latest-linux-version | awk -F'[-.]' '{print $5}')"
+        echo "Latest available version: $VER"
+       # if [ "$(cat bliss-version)" != "$VER" ] ; then
+       #     git config --global init.defaultBranch main
+       #     git config --global user.name "${{ USER_NAME }}"
+       #     git config --global user.email "${{ USER_EMAIL }}"
+       #     git add bliss-version
+       #     git commit -m "Bump bliss version to $VER"
+       #     git push
+       # else
+       #     echo "Version is unchanged ("$VER")"
+       # fi
       shell: bash
