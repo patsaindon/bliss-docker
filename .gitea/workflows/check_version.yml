@@ -7,18 +7,21 @@ on:
   pull_request:
 
 jobs:
-  docker-build:
+  check_version:
     runs-on: ubuntu-latest
-
+    container:
+      image: catthehacker/ubuntu:act-latest
+    env:
+      DOCKER_ORG: gitea
+      DOCKER_LATEST: nightly
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Update and install git
       run: |
         apt-get update
         apt install git
-
 
     - name: Get latest bliss version
       run: |
