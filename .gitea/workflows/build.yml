@@ -18,6 +18,10 @@ jobs:
         with:
           fetch-depth: 0 # all history for all branches and tags
 
+    - name: Update and install git
+      run: |
+        VER="$(cat bliss-version)"
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
@@ -36,5 +40,5 @@ jobs:
           context: .
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: patsaindon/docker-bliss:latest
-          
+          tags: patsaindon/docker-bliss:${{ VER }}-amd64, patsaindon/docker-bliss:${{ VER }}-arm64, patsaindon/docker-bliss:${{ VER }}-latest 
+

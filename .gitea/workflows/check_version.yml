@@ -28,9 +28,8 @@ jobs:
           git config --global user.name "${{ USER_NAME }}"
           git config --global user.email "${{ USER_EMAIL }}"
           git add bliss-version
-          git commit -m "Bump bliss version"
+          git commit -m "Bump bliss version to $VER"
           git push
         else
           echo "Version is unchanged ("$VER")"
         fi
-        
