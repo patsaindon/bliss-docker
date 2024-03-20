@@ -23,9 +23,9 @@ jobs:
     - name: Get latest bliss version
       run: |
         VER="$(curl -Ls http://www.blisshq.com/app/latest-linux-version | awk -F'[-.]' '{print $5}')"
-        echo "$VER"
+        echo "${{ VER }}"
         if [ "$(cat bliss-version)" != "$VER" ] ; then
-          echo "$VER" > bliss-version
+          echo "${{ VER }}" > bliss-version
           git config --global init.defaultBranch main
           git config --global user.name "${{ USER_NAME }}"
           git config --global user.email "${{ USER_EMAIL }}"
