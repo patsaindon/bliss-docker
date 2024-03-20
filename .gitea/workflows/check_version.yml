@@ -10,11 +10,6 @@ on:
 jobs:
   check_version:
     runs-on: ubuntu-latest
-    container:
-      image: catthehacker/ubuntu:act-latest
-    env:
-      DOCKER_ORG: gitea
-      DOCKER_LATEST: nightly
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -23,5 +18,3 @@ jobs:
       run: |
         ls -l
         ./check_version.sh
-
-
