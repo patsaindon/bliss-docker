@@ -14,4 +14,4 @@ jobs:
 
     - name: Update and install git
       run: |
-        docker build .
+        docker run hello-world
