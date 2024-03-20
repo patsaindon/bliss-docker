@@ -42,6 +42,6 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            ${{ env.DOCKER_ORG }}/docker-bliss:${{ env.RELEASE_VERSION }}
-            ${{ env.DOCKER_ORG }}/docker-bliss:${{ env.DOCKER_LATEST }}
-            ${{ env.DOCKER_ORG }}/docker-bliss:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/docker-bliss:${{ env.RELEASE_VERSION }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/docker-bliss:${{ env.DOCKER_LATEST }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/docker-bliss:latest
