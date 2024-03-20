@@ -41,6 +41,7 @@ jobs:
           context: .
           push: true
           platforms: linux/amd64,linux/arm64
-          tags:  |
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ DOCKER_IMAGE_NAME }}:${{ env.RELEASE_VERSION }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ DOCKER_IMAGE_NAME }}:latest
+          tags: |
+            ${{ env.DOCKER_ORG }}/docker-bliss:${{ env.RELEASE_VERSION }}
+            ${{ env.DOCKER_ORG }}/docker-bliss:${{ env.DOCKER_LATEST }}
+            ${{ env.DOCKER_ORG }}/docker-bliss:latest
